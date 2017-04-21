@@ -1,0 +1,193 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/benkeen/grunt-search">grunt-search (v0.1.8)</a>
+</h1>
+<h4>Grunt plugin that searches a list of files and logs all findings in various formats.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-search">module grunt-search</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-search.grunt-search">
+            function <span class="apidocSignatureSpan"></span>grunt-search
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-search" id="apidoc.module.grunt-search">module grunt-search</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-search.grunt-search" id="apidoc.element.grunt-search.grunt-search">
+        function <span class="apidocSignatureSpan"></span>grunt-search
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-search = function (grunt) {
+
+	grunt.initConfig({
+
+		// before generating any new files, remove any previously-created files
+		clean: {
+			tests: ['test/tmp']
+		},
+
+		jshint: {
+			all: ['Gruntfile.js', 'tasks/search.js'],
+			options: {
+				force: true,
+				curly: false,
+				eqeqeq: false,
+				immed: false,
+				latedef: true,
+				newcap: false,
+				noarg: true,
+				sub: true,
+				undef: true,
+				boss: true,
+				eqnull: true,
+				node: true,
+				smarttabs: true,
+				multistr: true,
+				browser: true,
+				onecase: true,
+				asi: true,
+				strict: false,
+				trailing: false,
+				nonstandard: true,
+				noempty: false,
+				shadow: true,
+				globals: {
+					module: true
+				}
+			}
+		},
+
+		// configuration to be run (and then tested)
+		search: {
+			default: {
+				files: {
+					src: ["test/test_source.html"]
+				},
+				options: {
+					searchString: "style",
+					logFile: "test/tmp/results.json",
+					logFormat: "json",
+					outputExaminedFiles: true
+				}
+			},
+
+			junit: {
+				files: {
+					src: ["test/fixtures/file*", "!test/fixtures/file3*"]
+				},
+				options: {
+					searchString: "@nocommit",
+					logFile: "test/tmp/junit-nocommit.xml",
+					logFormat: "junit"
+				}
+			},
+
+			customLogSearch: {
+				files: {
+					src: ["test/test_source.html"]
+				},
+				options: {
+					logFormat: "custom",
+					searchString: [".net", "mon"],
+					customLogFormatCallback: function(params) {
+
+            // here you'd do whatever you want with the data. The console.log() just outputs [Object] for the really
+            // interesting parts - but you can access it here
+						console.log(params);
+					}
+				}
+			}
+		},
+
+		// unit tests
+		nodeunit: {
+			tests: ['test/*_test.js']
+		}
+	});
+
+	grunt.loadTasks('tasks');
+
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-nodeunit');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+
+	// whenever the "test" task is run, first clean the "tmp" dir, then run this plugin's task(s), then test the result
+	grunt.registerTask('test', ['jshint', 'clean', 'search', 'nodeunit']);
+
+	// by default, lint and run all tests
+	grunt.registerTask('default', ['search', 'test']);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
